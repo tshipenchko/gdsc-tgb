@@ -1,0 +1,15 @@
+# Variables
+/var/
+
+# Byte-compiled
+__pycache__/
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+.venv
+
+# JetBrains IDEs
+.idea/
