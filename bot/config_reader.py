@@ -3,6 +3,7 @@ from pydantic import BaseSettings, SecretStr
 
 class Settings(BaseSettings):
     bot_token: SecretStr
+    db_url: str
 
     root_locale: str = "en"
 

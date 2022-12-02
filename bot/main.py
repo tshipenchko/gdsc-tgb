@@ -7,6 +7,7 @@ from bot.config_reader import Settings
 from bot.handlers import setup_routers
 from bot.middlewares import setup_middlewares
 from bot.translator import generate_hub
+from bot.db import create_session_maker, create_engine
 
 
 async def main():
@@ -20,6 +21,8 @@ async def main():
     config = Settings()
     locales_dir = Path(__file__).parent.joinpath("locales")
     translator_hub = generate_hub(locales_dir, config.root_locale)
+    engine = create_engine(config.db_url)
+    session_maker = create_session_maker(engine)
 
     # Setup bot
     bot = Bot(token=config.bot_token.get_secret_value())
@@ -32,6 +35,7 @@ async def main():
     kwargs = {
         "config": config,
         "_translator_hub": translator_hub,
+        "_session_maker": session_maker,
     }
 
     # Run bot
