@@ -11,4 +11,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Run the bot
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        pass

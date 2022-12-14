@@ -19,8 +19,10 @@ async def main():
 
     # Setup dependencies
     config = Settings()
+
     locales_dir = Path(__file__).parent.joinpath("locales")
     translator_hub = generate_hub(locales_dir, config.root_locale)
+
     engine = create_engine(config.db_url)
     session_maker = create_session_maker(engine)
 
@@ -28,8 +30,8 @@ async def main():
     bot = Bot(token=config.bot_token.get_secret_value())
     dp = Dispatcher()
     router = setup_routers()
-    setup_middlewares(router)
     dp.include_router(router)
+    setup_middlewares(dp)
 
     # Prepare context data
     kwargs = {
